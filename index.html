@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tileMemory Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Get matching tiles</h1>
+    <br>
+    <div id="settingSpace">
+        <div id="numPlayers">
+            No. of players
+            <select id="num_playerSelector">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+            </select>
+        </div>   
+    </div>
+    
+    <label id="infoLabel" style="display: none">player 1's turn</label>
+
+    <div id="scoreSpace">
+    </div>
+
+    <div id="initSpace">
+        <button id="playBtn" onclick="initGame()">Play</button>
+    </div>
+
+    <div id="mainSpace">
+    </div>
+    <button id="restartBtn" style="display: none" onclick="restartBtnClicked()">Restart</button>
+
+    <script src="script.js"></script> 
+</body>
+</html>
