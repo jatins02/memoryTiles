@@ -39,7 +39,7 @@ mainSpace.addEventListener("click", event => {
     mainGame(event, getFlippedTiles());
 })
 
-//-------------------reqd functions-----------------------------
+//-------------------reqd. functions-----------------------------
 
 function fillUpTiles(){
     const allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
