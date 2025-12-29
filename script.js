@@ -57,7 +57,6 @@ function fillUpTiles(){
     for (tile of mainSpace.children){
         randTile = Math.floor(Math.random() * allowedChars.length);
         tile.textContent = selectedChars[randTile];
-        tile.style.color = "lightblue";
     }
 }
 
@@ -79,7 +78,9 @@ function makeTiles(){
 
 function initScoreSpace(numPlayers){
     for (let i = 0; i < numPlayers; i++){
+        scoreSpace.style.display = "flex";
         child = document.createElement("label");
+        child.classList.add("scoreLabel");
         scoreSpace.append(child);
         child.style.display = "block";
         child.textContent = `Player ${i+1}: 0`;
@@ -119,7 +120,7 @@ function compareTiles(array){
 
 function changeTurn(numPlayers){
     currentTurn = (currentTurn === numPlayers) ? 1 : currentTurn + 1;
-    infoLabel.textContent = `player ${currentTurn}'s turn`;
+    infoLabel.textContent = `Player ${currentTurn}'s turn`;
 }
 
 function disableTiles(array){
@@ -163,6 +164,7 @@ function restartBtnClicked(){
     infoLabel.style.display = "none";
     playBtn.style.display = "block";
     restartBtn.style.display = "none";
+    scoreSpace.style.display = "none";
 }
 
 
