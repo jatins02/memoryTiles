@@ -9,10 +9,9 @@
 
 <body>
     <h1>Get matching tiles</h1>
-    <br>
     <div id="settingSpace">
-        <div id="numPlayers">
-            No. of players
+        <div id="numPlayerSpace">
+            <label id="txt_numPlayer">No. of players:</label>
             <select id="num_playerSelector">
                 <option>1</option>
                 <option>2</option>
@@ -20,13 +19,13 @@
                 <option>4</option>
             </select>
         </div>   
+        <label id="infoLabel" style="display: none">Player 1's turn</label>
     </div>
     
-    <label id="infoLabel" style="display: none">player 1's turn</label>
-
     <div id="scoreSpace">
     </div>
-
+    
+        
     <div id="initSpace">
         <button id="playBtn" onclick="initGame()">Play</button>
     </div>
