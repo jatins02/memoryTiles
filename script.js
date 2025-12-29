@@ -97,7 +97,7 @@ function mainGame(event, flippedTiles){
     else if (flippedTiles === 1){
         event.target.classList.add("flipBtn");
         compareTiles(mainSpace.children);
-        setTimeout(unflipTiles, 2212);
+        setTimeout(unflipTiles, 1222);
     }
 }
 
@@ -165,6 +165,7 @@ function restartBtnClicked(){
     playBtn.style.display = "block";
     restartBtn.style.display = "none";
     scoreSpace.style.display = "none";
+    num_playerSelector.disabled = false;
 }
 
 

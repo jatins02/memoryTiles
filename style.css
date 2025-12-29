@@ -128,7 +128,7 @@ body{
 
 .flipBtn{
     background: honeydew;
-    animation: spin-around 0.88s ease-out;
+    animation: spin-around 0.69s ease-out;
     transition: background 0.3s ease-in;
     color: hsl(240, 19%, 35%)
 }
