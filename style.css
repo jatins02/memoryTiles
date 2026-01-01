@@ -1,3 +1,7 @@
+*{
+    margin: 0;
+}
+
 h1{
     background: hsl(60, 100%, 94%);
     padding: 8px;
@@ -133,6 +137,12 @@ body{
     color: hsl(240, 19%, 35%)
 }
 
+.disableTile{
+    color: black;
+    font-weight: bold;
+    background-color: lavenderblush;
+}
+
 @keyframes spin-around{
     from {
         transform: rotateY(0deg);
@@ -141,55 +151,4 @@ body{
         transform: rotateY(180deg);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
