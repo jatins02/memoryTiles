@@ -5,10 +5,11 @@ const scoreSpace = document.getElementById("scoreSpace");
 const playBtn = document.getElementById("playBtn");
 const restartBtn = document.getElementById("restartBtn");
 const infoLabel = document.getElementById("infoLabel");
+const viewportWidth = window.innerWidth;
 
 // constants that can be changed...
-const rowCount = 6;
-const columnCount = 5;
+const rowCount = 3;
+const columnCount = 4;
 
 // variable declaration
 let currentTurn = 1;
@@ -17,6 +18,8 @@ let numPlayers;
 let playerScores = [];
 
 
+
+// make the mainSpace div non flippable
 
 // game initialisation
 function initGame(){
@@ -45,7 +48,7 @@ function fillUpTiles(){
     const allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
     let selectedChars = [];
     let randInd;
-    let randTile;
+    let randChar;
 
     while (selectedChars.length < (rowCount * columnCount)){
         randInd = Math.floor(Math.random() * allowedChars.length);
@@ -55,8 +58,12 @@ function fillUpTiles(){
     }
 
     for (tile of mainSpace.children){
-        randTile = Math.floor(Math.random() * allowedChars.length);
-        tile.textContent = selectedChars[randTile];
+        //randTile = Math.floor(Math.random() * allowedChars.length);
+        //tile.textContent = selectedChars[randTile];
+        randInd = Math.floor(Math.random() * selectedChars.length);
+        randChar = selectedChars.splice(randInd, 1);
+        tile.textContent = randChar;
+        console.log(randChar);
     }
 }
 
@@ -70,7 +77,7 @@ function makeTiles(){
     }
 
     mainSpace.style.display = "grid";
-    let sideLength = 480 / rowCount;
+    let sideLength = viewportWidth / columnCount;
     mainSpace.style.gridTemplateRows = `repeat(${rowCount}, ${sideLength}px)`;
     mainSpace.style.gridTemplateColumns = `repeat(${columnCount}, ${sideLength}px)`;
 
@@ -112,6 +119,7 @@ function compareTiles(array){
     if (flippedTileArray[0].textContent === flippedTileArray[1].textContent){
         updateScore(currentTurn);
         disableTiles(flippedTileArray);
+        checkGameEnded();
     }
     else{
         changeTurn(numPlayers);
@@ -127,9 +135,7 @@ function disableTiles(array){
     array.forEach(child => {
         child.disabled = true;
         child.textContent = "!";
-        child.style.color = "black";
-        child.style.fontWeight = "bold";
-        child.style.background = "lavenderblush";
+        child.classList.add("disableTile");
     });
 }
 
@@ -156,6 +162,36 @@ function getFlippedTiles(){
     return flippedTiles;
 }
 
+function checkGameEnded(){
+    tempCollection = mainSpace.children;
+    numChildren = tempCollection.length;
+    let counter = 0;
+
+    for (element of tempCollection){
+        if (element.classList.contains("disableTile")){
+            counter += 1;
+        }
+    }
+
+    if (counter === numChildren){
+        gameEnded();
+    }
+
+}
+
+function gameEnded(){
+    let highestScorer;
+    let maxScore = 0;
+    let indx = 0;
+    for (score of playerScores){
+        if (score >= maxScore){
+            maxScore = score;
+            highestScorer = indx + 1;
+        }
+        indx+=1;
+    }
+    infoLabel.textContent = `Player ${highestScorer} has won.`;
+}
 
 // restart function
 function restartBtnClicked(){
