@@ -16,6 +16,11 @@ body{
     background: hsl(69, 11%, 77%);
 }
 
+#mainSpace{
+    pointer-events: none;
+    cursor: default;
+}
+
 #settingSpace{
     background: lavenderblush;
     text-align: center;

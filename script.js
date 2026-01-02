@@ -5,7 +5,6 @@ const scoreSpace = document.getElementById("scoreSpace");
 const playBtn = document.getElementById("playBtn");
 const restartBtn = document.getElementById("restartBtn");
 const infoLabel = document.getElementById("infoLabel");
-const viewportWidth = window.innerWidth;
 
 // constants that can be changed...
 const rowCount = 3;
@@ -24,7 +23,6 @@ let playerScores = [];
 // game initialisation
 function initGame(){
     makeTiles();
-    
     numPlayers = Number(num_playerSelector.value);
     for (let counter = 1; counter <= numPlayers; counter++){
         playerScores.push(0);
@@ -75,12 +73,11 @@ function makeTiles(){
         button.id = `btn${i+1}`;
         mainSpace.appendChild(button);
     }
-
+    let viewportWidth = window.innerWidth;
     mainSpace.style.display = "grid";
     let sideLength = viewportWidth / columnCount;
     mainSpace.style.gridTemplateRows = `repeat(${rowCount}, ${sideLength}px)`;
     mainSpace.style.gridTemplateColumns = `repeat(${columnCount}, ${sideLength}px)`;
-
 }
 
 function initScoreSpace(numPlayers){
