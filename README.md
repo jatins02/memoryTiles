@@ -1,1 +1,2 @@
-adding readme, cleaning up the code, working on css remains
+memoryTiles game.
+Made in HTML, CSS and Javascript.
