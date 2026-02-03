@@ -7,18 +7,14 @@ const restartBtn = document.getElementById("restartBtn");
 const infoLabel = document.getElementById("infoLabel");
 
 // constants that can be changed...
-const rowCount = 3;
-const columnCount = 4;
+const rowCount = 7;
+const columnCount = 8;
 
 // variable declaration
 let currentTurn = 1;
 let flippedTiles;
 let numPlayers;
 let playerScores = [];
-
-
-
-// make the mainSpace div non flippable
 
 // game initialisation
 function initGame(){
@@ -40,31 +36,31 @@ mainSpace.addEventListener("click", event => {
     mainGame(event, getFlippedTiles());
 })
 
-//-------------------reqd. functions-----------------------------
-
-function fillUpTiles(){
-    const allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-    let selectedChars = [];
-    let randInd;
-    let randChar;
-
-    while (selectedChars.length < (rowCount * columnCount)){
-        randInd = Math.floor(Math.random() * allowedChars.length);
-        let randChar = allowedChars[randInd];
-        selectedChars.push(randChar);
-        selectedChars.push(randChar);
-    }
-
-    for (tile of mainSpace.children){
-        //randTile = Math.floor(Math.random() * allowedChars.length);
-        //tile.textContent = selectedChars[randTile];
-        randInd = Math.floor(Math.random() * selectedChars.length);
-        randChar = selectedChars.splice(randInd, 1);
-        tile.textContent = randChar;
-        console.log(randChar);
+function initScoreSpace(numPlayers){
+    for (let i = 0; i < numPlayers; i++){
+        scoreSpace.style.display = "flex";
+        child = document.createElement("label");
+        child.classList.add("scoreLabel");
+        scoreSpace.append(child);
+        child.style.display = "block";
+        child.textContent = `Player ${i+1}: 0`;
     }
 }
 
+function mainGame(event, flippedTiles){
+    if (event.target.id != "mainSpace"){
+        if (flippedTiles === 0){
+            event.target.classList.add("flipBtn");
+        }
+        else if (flippedTiles === 1){
+            event.target.classList.add("flipBtn");
+            compareTiles(mainSpace.children);
+            setTimeout(unflipTiles, 1222);
+        }
+    }   
+}
+
+// utility functions
 function makeTiles(){
     for (let i = 0; i < (rowCount * columnCount); i++){
         const button = document.createElement("button");
@@ -80,28 +76,23 @@ function makeTiles(){
     mainSpace.style.gridTemplateColumns = `repeat(${columnCount}, ${sideLength}px)`;
 }
 
-function initScoreSpace(numPlayers){
-    for (let i = 0; i < numPlayers; i++){
-        scoreSpace.style.display = "flex";
-        child = document.createElement("label");
-        child.classList.add("scoreLabel");
-        scoreSpace.append(child);
-        child.style.display = "block";
-        child.textContent = `Player ${i+1}: 0`;
+function fillUpTiles(){
+    const allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+    let selectedChars = [];
+    let randInd;
+    let randChar;
+
+    while (selectedChars.length < (rowCount * columnCount)){
+        randInd = Math.floor(Math.random() * allowedChars.length);
+        let randChar = allowedChars[randInd];
+        selectedChars.push(randChar);
+        selectedChars.push(randChar);
     }
-}
 
-
-
-// game mechanics
-function mainGame(event, flippedTiles){
-    if (flippedTiles === 0){
-        event.target.classList.add("flipBtn");
-    }
-    else if (flippedTiles === 1){
-        event.target.classList.add("flipBtn");
-        compareTiles(mainSpace.children);
-        setTimeout(unflipTiles, 1222);
+    for (tile of mainSpace.children){
+        randInd = Math.floor(Math.random() * selectedChars.length);
+        randChar = selectedChars.splice(randInd, 1);
+        tile.textContent = randChar;
     }
 }
 
@@ -123,17 +114,17 @@ function compareTiles(array){
     }
 }
 
-function changeTurn(numPlayers){
-    currentTurn = (currentTurn === numPlayers) ? 1 : currentTurn + 1;
-    infoLabel.textContent = `Player ${currentTurn}'s turn`;
-}
-
 function disableTiles(array){
     array.forEach(child => {
         child.disabled = true;
         child.textContent = "!";
         child.classList.add("disableTile");
     });
+}
+
+function changeTurn(numPlayers){
+    currentTurn = (currentTurn === numPlayers) ? 1 : currentTurn + 1;
+    infoLabel.textContent = `Player ${currentTurn}'s turn`;
 }
 
 function updateScore(currentTurn){
@@ -173,7 +164,6 @@ function checkGameEnded(){
     if (counter === numChildren){
         gameEnded();
     }
-
 }
 
 function gameEnded(){
